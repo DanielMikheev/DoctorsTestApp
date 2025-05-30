@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct DoctorsTestAppApp: App {
+struct DoctorsTestApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
