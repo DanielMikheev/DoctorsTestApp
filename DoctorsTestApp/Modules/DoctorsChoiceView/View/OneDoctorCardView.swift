@@ -6,31 +6,35 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct OneDoctorCardView: View {
     @State var doctorsViewModel = DoctorsViewModel()
-    @State var isActive: Bool = false
+    @State var lastName: String
+    @State var firstName: String
+    @State var patronymic: String
+    @State var avatar: String
     
     var body: some View {
         ZStack{
             VStack(spacing: 15){
                 HStack{
                     Button {
-                       
+                        //
                     } label: {
                         HStack(alignment: .top){
-                            Image(.img)
+                            WebImage(url: URL(string: avatar))
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 50, height: 50)
-                                .clipShape(.circle)
+                                .clipShape(Circle())
                             
                             VStack(alignment: .leading, spacing: 10){
                                 VStack(alignment: .leading){
-                                    Text("Семенова")
+                                    Text("\(lastName)")
                                         .fontWeight(.semibold)
                                         .foregroundStyle(.black)
-                                    Text("Дарья Сергеевна")
+                                    Text("\(firstName) \(patronymic)")
                                         .fontWeight(.semibold)
                                         .foregroundStyle(.black)
                                 }
@@ -80,11 +84,14 @@ struct OneDoctorCardView: View {
                             }
                             Spacer()
                             Button {
-                                isActive.toggle()
+                                withAnimation(.interpolatingSpring) {
+                                    doctorsViewModel.isActiveHeart.toggle()
+                                }
+                                
                             } label: {
                                 Image(systemName: "heart.fill")
                             }
-                            .foregroundStyle(isActive ? .pink : .gray)
+                            .foregroundStyle(doctorsViewModel.isActiveHeart ? .pink : .gray)
                             .clipped()
                         }
                     }
@@ -96,13 +103,16 @@ struct OneDoctorCardView: View {
                 .frame(width: 311, height: 126)
                 
                 Button {
-                    //
+                    withAnimation(.linear) {
+                        doctorsViewModel.isActiveQueue.toggle()
+                    }
+                    
                 } label: {
-                    Text("Записаться")
-                        .foregroundStyle(.white)
+                    Text(doctorsViewModel.isActiveQueue ? "Нет свободного расписания" : "Записаться")
+                        .foregroundStyle(doctorsViewModel.isActiveQueue ? .black : .white )
                 }
                 .frame(width: 311, height: 47)
-                .background(.pink)
+                .background(doctorsViewModel.isActiveQueue ? .btn : .pink)
                 .clipShape(.rect(cornerRadius: 8))
             }
             .frame(width: 311, height: 188)
@@ -112,5 +122,7 @@ struct OneDoctorCardView: View {
         .background(.white)
         .clipShape(.rect(cornerRadius: 10))
         .padding(.bottom, 15)
+
+        
     }
 }

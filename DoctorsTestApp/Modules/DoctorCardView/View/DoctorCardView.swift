@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DoctorCardView: View {
+    @State var doctorsViewModel = DoctorsViewModel()
+    @State var lastName: String?
+    @State var firstName: String?
+    @State var patronymic: String?
+    @State var avatar: String?
+    
     var body: some View {
         ZStack{
             VStack(spacing: 20){
-                HStack{
-                    HStack(spacing: 115){
+                    HStack(spacing: 100){
                         Button {
                             //
                         } label: {
@@ -21,6 +27,7 @@ struct DoctorCardView: View {
                                 .font(Font.system(.title, weight: .bold))
                         }
                         .frame(width: 12, height: 21)
+                        .padding(.leading, 16)
                         
                         Text("Педиатр")
                             .font(Font.system(.title2, weight: .regular))
@@ -28,21 +35,21 @@ struct DoctorCardView: View {
                         
                         Spacer()
                     }
-                }
                 .frame(maxWidth: .infinity, alignment: Alignment(horizontal: .leading, vertical: .center))
                 .padding()
                 
                 HStack(spacing: 16){
-                    Image(.img)
+                    WebImage(url: URL(string: avatar ?? ""))
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
                     
                     VStack(alignment: .leading){
-                        Text("Семенова")
+                        Text("\(lastName ?? "")")
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
-                        Text("Дарья Сергеевна")
+                        Text("\(firstName ?? "") \(patronymic ?? "")")
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
                     }
@@ -88,7 +95,7 @@ struct DoctorCardView: View {
                     .frame(width: 343, height: 30, alignment: Alignment(horizontal: .leading, vertical: .center))
                 }
                 
-                VStack(spacing: 100){
+                VStack(spacing: 80){
                     VStack(spacing: 24){
                         ZStack{
                             Rectangle()
@@ -130,4 +137,3 @@ struct DoctorCardView: View {
         .background(.back)
     }
 }
-

@@ -17,13 +17,8 @@ struct DoctorModel: Codable {
 }
 
 struct DoctorItem: Codable{
-    var avatar: String?
-    var lastName: String?
-    var firstName: String?
+    var firstName: String
     var patronymic: String?
-    var ratings: [DoctorRating]
-}
-
-struct DoctorRating: Codable{
-    var value: Int?
+    var lastName: String
+    var avatar: String?
 }

@@ -11,14 +11,13 @@ struct FilterView: View {
     @State var selectedOption: SortedOption = .price
     
     var body: some View {
-        Picker("Sorted", selection: $selectedOption) {
+        Picker("", selection: $selectedOption) {
             ForEach(SortedOption.allCases, id: \.self) { option in
                 Text(option.rawValue).tag(option)
             }
         }
         .pickerStyle(.segmented)
         .colorMultiply(.pink)
-        .background(.back)
         .padding()
     }
 }
