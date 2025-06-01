@@ -8,6 +8,8 @@
 import SwiftUI
 import SDWebImage
 
+
+
 @Observable
 class DoctorsViewModel{
     var isActiveHeart: Bool = false
@@ -17,10 +19,8 @@ class DoctorsViewModel{
         
         func loadDoctors() {
             networkLayer.loadUsersFromJson { [weak self] response in
-                DispatchQueue.main.async {
-                    self?.doctors = response.data.users
-                    
-                }
+                guard let self = self else { return }
+                self.doctors = response.data.users
             }
         }
     }

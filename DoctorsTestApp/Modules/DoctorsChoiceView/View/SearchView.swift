@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var text: String = ""
+    @State private var searchText: String = ""
     @State private var searchImage: String = "magnifyingglass"
     @State private var screenWidth: CGFloat = UIScreen.main.bounds.width
     var body: some View {
@@ -19,7 +19,7 @@ struct SearchView: View {
                     .foregroundStyle(.white)
                     .clipShape(.rect(cornerRadius: 8))
                     .shadow(radius: 3, x: 1, y: 1)
-                TextField("Поиск", text: $text)
+                TextField("Поиск", text: $searchText)
                     .padding(30)
                     .frame(width: screenWidth - 100, height: 24)
                     .background()

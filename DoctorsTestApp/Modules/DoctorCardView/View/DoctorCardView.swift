@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct DoctorCardView: View {
     @State var doctorsViewModel = DoctorsViewModel()
+    @Binding var path: NavigationPath
     @State var lastName: String?
     @State var firstName: String?
     @State var patronymic: String?
@@ -20,7 +21,7 @@ struct DoctorCardView: View {
             VStack(spacing: 20){
                     HStack(spacing: 100){
                         Button {
-                            //
+                            path.removeLast()
                         } label: {
                             Image(systemName: "chevron.left")
                                 .foregroundStyle(.gray)
@@ -133,6 +134,7 @@ struct DoctorCardView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .frame(maxWidth: .infinity, maxHeight:  .infinity, alignment: Alignment(horizontal: .center, vertical: .top))
         .background(.back)
     }

@@ -11,7 +11,8 @@ import SwiftUI
 struct DoctorsTestApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+                MainTabView()
+            
         }
     }
 }

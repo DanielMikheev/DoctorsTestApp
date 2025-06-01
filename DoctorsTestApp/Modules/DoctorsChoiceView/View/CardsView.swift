@@ -7,29 +7,44 @@
 
 import SwiftUI
 
+
+
 struct CardsView: View {
     @State var doctorViewModel = DoctorsViewModel()
-    @State var path = NavigationPath()
-    
+    @Binding var path: NavigationPath
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            if doctorViewModel.doctors.isEmpty {
-                ProgressView()
-            } else {
-                ForEach(doctorViewModel.doctors.indices, id: \.self) { index in
-                    let doctor = doctorViewModel.doctors[index]
-                    OneDoctorCardView(
-                        lastName: doctor.lastName,
-                        firstName: doctor.firstName,
-                        patronymic: doctor.patronymic ?? "",
-                        avatar: doctor.avatar ?? ""
-                    )
+        ZStack{
+            ScrollView(.vertical, showsIndicators: false) {
+                if doctorViewModel.doctors.isEmpty {
+                    ProgressView()
+                } else {
+                    ForEach(doctorViewModel.doctors.indices, id: \.self) { index in
+                        let doctor = doctorViewModel.doctors[index]
+                        ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)){
+                            OneDoctorCardView(
+                            lastName: doctor.lastName,
+                            firstName: doctor.firstName,
+                            patronymic: doctor.patronymic ?? "",
+                            avatar: doctor.avatar ?? ""
+                        )
+                            
+                            Button {
+                                path.append(Pages.card(doctor.lastName, doctor.firstName, doctor.patronymic ?? "", doctor.avatar ?? ""))
+                            } label: {
+                                Rectangle()
+                                    .foregroundStyle(.clear)
+                            }
+                            .frame(width: 300, height: 150)
+                        }
+                    }
                 }
             }
         }
-            .scrollTargetBehavior(.viewAligned)
-            .onAppear{
-                doctorViewModel.loadDoctors()
-            }
+        .frame(maxWidth: .infinity, alignment: Alignment(horizontal: .center, vertical: .top))
+        .scrollTargetBehavior(.viewAligned)
+        .background(.back)
+        .onAppear{
+            doctorViewModel.loadDoctors()
         }
     }
+}

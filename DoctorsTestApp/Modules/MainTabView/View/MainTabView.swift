@@ -16,7 +16,7 @@ struct MainTabView: View {
                     Text("Главная")
                 }
 
-            DoctorCardView()
+            Text("Приемы")
                 .tabItem {
                     Image(systemName: "list.clipboard.fill")
                     Text("Приемы")

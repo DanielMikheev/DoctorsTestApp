@@ -19,86 +19,78 @@ struct OneDoctorCardView: View {
         ZStack{
             VStack(spacing: 15){
                 HStack{
-                    Button {
-                        //
-                    } label: {
-                        HStack(alignment: .top){
-                            WebImage(url: URL(string: avatar))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                            
-                            VStack(alignment: .leading, spacing: 10){
-                                VStack(alignment: .leading){
-                                    Text("\(lastName)")
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.black)
-                                    Text("\(firstName) \(patronymic)")
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.black)
-                                }
-                                
-                                HStack(spacing: 2){
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
-                                        .foregroundStyle(.pink)
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
-                                        .foregroundStyle(.pink)
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
-                                        .foregroundStyle(.pink)
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
-                                        .foregroundStyle(.pink)
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 12, height: 12)
-                                        .foregroundStyle(.pink)
-                                }
-                                .frame(width: 70, height: 12)
-                                HStack(spacing: 5){
-                                    Text("Педиатр")
-                                        .foregroundStyle(.gray)
-                                        .font(Font.system(size: 14, weight: .light))
-                                    Image(systemName: "circle.fill")
-                                        .resizable()
-                                        .frame(width: 3, height: 3, alignment: .center)
-                                        .foregroundStyle(.gray)
-                                    Text("Стаж 27 лет")
-                                        .foregroundStyle(.gray)
-                                        .font(Font.system(size: 14, weight: .light))
-                                    
-                                }
-                                
-                                Text("от 600 ₽")
+                    HStack(alignment: .top){
+                        WebImage(url: URL(string: avatar))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                        
+                        VStack(alignment: .leading, spacing: 10){
+                            VStack(alignment: .leading){
+                                Text("\(lastName)")
                                     .fontWeight(.semibold)
                                     .foregroundStyle(.black)
-                                
+                                Text("\(firstName) \(patronymic)")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.black)
+                            }
+                            
+                            HStack(spacing: 2){
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.pink)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.pink)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.pink)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.pink)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.pink)
+                            }
+                            .frame(width: 70, height: 12)
+                            HStack(spacing: 5){
+                                Text("Педиатр")
+                                    .foregroundStyle(.gray)
+                                    .font(Font.system(size: 14, weight: .light))
+                                Image(systemName: "circle.fill")
+                                    .resizable()
+                                    .frame(width: 3, height: 3, alignment: .center)
+                                    .foregroundStyle(.gray)
+                                Text("Стаж 27 лет")
+                                    .foregroundStyle(.gray)
+                                    .font(Font.system(size: 14, weight: .light))
                                 
                             }
-                            Spacer()
-                            Button {
-                                withAnimation(.interpolatingSpring) {
-                                    doctorsViewModel.isActiveHeart.toggle()
-                                }
-                                
-                            } label: {
-                                Image(systemName: "heart.fill")
-                            }
-                            .foregroundStyle(doctorsViewModel.isActiveHeart ? .pink : .gray)
-                            .clipped()
+                            
+                            Text("от 600 ₽")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.black)
+                            
+                            
                         }
+                        Spacer()
+                        Button {
+                            withAnimation(.interpolatingSpring) {
+                                doctorsViewModel.isActiveHeart.toggle()
+                            }
+                            
+                        } label: {
+                            Image(systemName: "heart.fill")
+                        }
+                        .foregroundStyle(doctorsViewModel.isActiveHeart ? .pink : .gray)
+                        .clipped()
                     }
-
-                    
-                    
-                    
                 }
                 .frame(width: 311, height: 126)
                 
@@ -115,14 +107,11 @@ struct OneDoctorCardView: View {
                 .background(doctorsViewModel.isActiveQueue ? .btn : .pink)
                 .clipShape(.rect(cornerRadius: 8))
             }
-            .frame(width: 311, height: 188)
-
+            .frame(width: 343, height: 224)
+            .background(.white)
+            .clipShape(.rect(cornerRadius: 10))
+            .padding(.bottom, 15)
+            
         }
-        .frame(width: 343, height: 224)
-        .background(.white)
-        .clipShape(.rect(cornerRadius: 10))
-        .padding(.bottom, 15)
-
-        
     }
 }
