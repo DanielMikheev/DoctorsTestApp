@@ -18,14 +18,19 @@ enum Pages: Hashable{
 
 struct DoctorsChoiceView: View {
     @State var path  = NavigationPath()
+    
     var body: some View {
         NavigationStack(path: $path){
             ZStack{
                 VStack{
                     HeadView()
-                    SearchView()
-                    FilterView()
-                    CardsView(path: $path)
+                    VStack(spacing: 30){
+                        VStack(spacing: 20){
+                            SearchView()
+                            FilterView()
+                        }
+                        CardsView(path: $path)
+                    }
                 }
             }
             .navigationDestination(for: Pages.self){ item in
@@ -38,4 +43,9 @@ struct DoctorsChoiceView: View {
             .background(.back)
         }
     }
+}
+
+
+#Preview {
+    MainTabView()
 }

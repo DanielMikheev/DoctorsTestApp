@@ -12,15 +12,16 @@ import SDWebImage
 
 @Observable
 class DoctorsViewModel{
+    private let network = NetworkLayer()
+    var doctors: [DoctorItem] = []
     var isActiveHeart: Bool = false
     var isActiveQueue: Bool = false
-    var doctors: [DoctorItem] = []
-    private let networkLayer = NetworkLayer()
-        
-        func loadDoctors() {
-            networkLayer.loadUsersFromJson { [weak self] response in
-                guard let self = self else { return }
-                self.doctors = response.data.users
-            }
-        }
+    var lastNames: [String] = []
+    var isPressed: Bool = false
+    var selectedButton: SortedOption = .price
+    var searchableText: String = ""
+    
+    func getDoctors() -> [DoctorItem] {
+        return network.loadUsersFromJson()
     }
+}

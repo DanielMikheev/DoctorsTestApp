@@ -9,10 +9,10 @@ import Foundation
 
 class NetworkLayer{
     
-    func loadUsersFromJson(completion: @escaping (DoctorsDataModel) -> Void){
+    func loadUsersFromJson() -> [DoctorItem]{
         guard let url = Bundle.main.url(forResource: "test", withExtension: "json") else {
-            print("Файл формата JSON в проекте не найден!")
-            return
+            fatalError()
+            
         }
         
         do{
@@ -20,13 +20,11 @@ class NetworkLayer{
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let users = try decoder.decode(DoctorsDataModel.self, from: data)
-            completion(users)
-            
+            return users.data.users
         }catch{
             print("Ошибка при декодировании JSON: \(error.localizedDescription)")
         }
-        
+        return []
     }
-    
 }
 

@@ -11,15 +11,18 @@ import SwiftUI
 
 struct CardsView: View {
     @State var doctorViewModel = DoctorsViewModel()
+    @State var doctors: [DoctorItem] = []
     @Binding var path: NavigationPath
+
     var body: some View {
         ZStack{
             ScrollView(.vertical, showsIndicators: false) {
-                if doctorViewModel.doctors.isEmpty {
+                if doctors.isEmpty {
                     ProgressView()
                 } else {
-                    ForEach(doctorViewModel.doctors.indices, id: \.self) { index in
-                        let doctor = doctorViewModel.doctors[index]
+                    ForEach(doctors.indices, id: \.self) { index in
+                        let doctor = doctors[index]
+                        
                         ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)){
                             OneDoctorCardView(
                             lastName: doctor.lastName,
@@ -44,7 +47,7 @@ struct CardsView: View {
         .scrollTargetBehavior(.viewAligned)
         .background(.back)
         .onAppear{
-            doctorViewModel.loadDoctors()
+            self.doctors = doctorViewModel.getDoctors()
         }
     }
 }

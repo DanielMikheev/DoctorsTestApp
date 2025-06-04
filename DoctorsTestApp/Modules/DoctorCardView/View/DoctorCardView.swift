@@ -45,7 +45,7 @@ struct DoctorCardView: View {
                         .scaledToFill()
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                    
+                       
                     VStack(alignment: .leading){
                         Text("\(lastName ?? "")")
                             .fontWeight(.semibold)
@@ -122,15 +122,17 @@ struct DoctorCardView: View {
                     }
                     
                     Button {
-                        //
+                        withAnimation(.linear) {
+                            doctorsViewModel.isActiveQueue.toggle()
+                        }
+                        
                     } label: {
-                        Text("Записаться")
-                            .foregroundStyle(.white)
+                        Text(doctorsViewModel.isActiveQueue ? "Нет свободного расписания" : "Записаться")
+                            .foregroundStyle(doctorsViewModel.isActiveQueue ? .black : .white )
                     }
                     .frame(width: 343, height: 56)
-                    .background(.pink)
+                    .background(doctorsViewModel.isActiveQueue ? .btn : .pink)
                     .clipShape(.rect(cornerRadius: 8))
-                    
                 }
             }
         }
